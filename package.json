@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev",
+    "start": "remix-serve build",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.0.0",
+    "@remix-run/css-bundle": "^1.18.1",
+    "@remix-run/node": "^1.18.1",
+    "@remix-run/react": "^1.18.1",
+    "@remix-run/serve": "^1.18.1",
+    "arkyn_remix": "^0.0.55",
+    "bcryptjs": "^2.4.3",
+    "isbot": "^3.6.12",
+    "lucide-react": "^0.260.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.18.1",
+    "@remix-run/eslint-config": "^1.18.1",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "^8.45.0",
+    "prisma": "^5.0.0",
+    "tailwind-merge": "^1.13.2",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
