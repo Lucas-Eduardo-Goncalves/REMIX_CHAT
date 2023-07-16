@@ -1,19 +1,17 @@
-import { z } from "zod";
 import { formControl } from "arkyn_remix";
 import { json } from "@remix-run/node";
+
 import { authenticator, prisma } from "~/server/services";
+import { schema } from "../_schemas";
 
 type AddChatProps = {
   request: Request;
   formData: { [x: string]: any };
 };
 
-const schema = z.object({
-  email: z.string().min(1, "Field is required").email("Must be an email"),
-});
-
 export async function addChat({ formData, request }: AddChatProps) {
-  const formControlData = await formControl({ schema, formData });
+  const { addChat } = schema;
+  const formControlData = await formControl({ schema: addChat, formData });
   if (!formControlData.success) return json(formControlData, 400);
 
   const { email } = formControlData.data;
@@ -28,14 +26,21 @@ export async function addChat({ formData, request }: AddChatProps) {
 
   const chatAlreadyExists = await prisma.chat.findFirst({
     where: {
-      users: { every: { OR: [{ id: friendUser.id }, { id: user.id }] } },
+      UserChat: {
+        some: { OR: [{ userId: friendUser.id }, { userId: user.id }] },
+      },
     },
   });
+
   if (chatAlreadyExists) return json({ formError: "Chat already exists" }, 400);
 
-  await prisma.chat.create({
-    data: { users: { connect: [{ id: friendUser.id }, { id: user.id }] } },
-    include: { users: true },
+  const newChat = await prisma.chat.create({ data: {} });
+
+  await prisma.userChat.createMany({
+    data: [
+      { userId: user.id, chatId: newChat.id },
+      { userId: friendUser.id, chatId: newChat.id },
+    ],
   });
 
   return null;

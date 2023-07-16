@@ -11,7 +11,7 @@ export function ChatButton({ chat, user }: ChatButtonProps) {
       {chat.users
         .filter((users) => users.id !== user.id)
         .map((users) => (
-          <p>{users.name}</p>
+          <p key={users.id}>{users.name}</p>
         ))}
     </li>
   );

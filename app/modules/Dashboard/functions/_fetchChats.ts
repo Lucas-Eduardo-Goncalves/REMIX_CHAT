@@ -9,19 +9,16 @@ export async function fetch({ request }: FetchProps) {
   const user = await authenticator.isAuthenticated(request);
 
   const chats = await prisma.chat.findMany({
-    where: { users: { some: { id: user.id } } },
+    where: { UserChat: { some: { userId: user.id } } },
     include: {
-      users: { select: { email: true, id: true, name: true } },
+      UserChat: {
+        select: { User: { select: { email: true, id: true, name: true } } },
+      },
     },
   });
 
+  const { fetchSchema } = schema;
   const fetchReturn = { chats, user };
-  const parsedData = schema.fetchSchema.safeParse(fetchReturn);
 
-  if (!parsedData.success) {
-    console.log(parsedData.error.errors);
-    throw new Error("Fetch failed");
-  }
-
-  return parsedData.data;
+  return fetchSchema.parse(fetchReturn);
 }
