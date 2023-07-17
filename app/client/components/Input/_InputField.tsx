@@ -20,7 +20,7 @@ export function InputField({
   return (
     <input
       className={twMerge(
-        "text-md bg-neutral-50 focus:border-cyan-600 rounded-md p-3 outline-none border-2 border-transparent dark:bg-neutral-800 font-semibold ",
+        "text-md bg-neutral-50 focus:border-cyan-900 rounded-md p-3 outline-none border-2 border-transparent dark:bg-neutral-800 font-semibold ",
         className,
         inputIsError && !disabledErrorBorder
           ? "border-red-600 dark:border-red-700"

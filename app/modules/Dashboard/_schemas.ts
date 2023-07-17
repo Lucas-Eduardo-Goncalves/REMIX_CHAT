@@ -18,18 +18,18 @@ const chat = z
   .object({
     id: z.string(),
     UserChat: z.array(user),
-    created_at: z
+    createdAt: z
       .date()
-      .transform((created_at) => new Date(created_at).toLocaleDateString()),
-    updated_at: z
+      .transform((createdAt) => new Date(createdAt).toLocaleDateString()),
+    updatedAt: z
       .date()
-      .transform((updated_at) => new Date(updated_at).toLocaleDateString()),
+      .transform((updatedAt) => new Date(updatedAt).toLocaleDateString()),
   })
   .transform((data) => ({
     id: data.id,
     users: data.UserChat,
-    created_at: data.created_at,
-    updated_at: data.updated_at,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
   }));
 
 const fetchSchema = z.object({

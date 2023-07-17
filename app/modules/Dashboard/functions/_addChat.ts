@@ -26,9 +26,8 @@ export async function addChat({ formData, request }: AddChatProps) {
 
   const chatAlreadyExists = await prisma.chat.findFirst({
     where: {
-      UserChat: {
-        some: { OR: [{ userId: friendUser.id }, { userId: user.id }] },
-      },
+      UserChat: { some: { userId: friendUser.id } },
+      AND: { UserChat: { some: { userId: user.id } } },
     },
   });
 

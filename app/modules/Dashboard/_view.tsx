@@ -8,8 +8,8 @@ export function View() {
   const { chats, user } = useLoaderData<LoaderProps>();
 
   return (
-    <Layout.Main className="p-8 flex flex-1 space-x-6">
-      <section className="flex-1">
+    <Layout.Main className="flex flex-1">
+      <section className="flex-1 p-8">
         <AddChatForm />
         <Divider />
 
