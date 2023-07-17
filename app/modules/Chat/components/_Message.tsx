@@ -39,7 +39,7 @@ export function Message({ content, messages }: MessageProps) {
       <p
         className={twMerge(
           "p-4 rounded-md",
-          isMe ? "bg-neutral-900" : "bg-neutral-900"
+          isMe ? "bg-cyan-600" : "bg-neutral-900"
         )}
       >
         {content.message}

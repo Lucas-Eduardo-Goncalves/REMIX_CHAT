@@ -19,7 +19,7 @@ export function ChatButton({ chat, user }: ChatButtonProps) {
       onClick={handleNavigateUser}
       className={twMerge(
         "flex-1 bg-neutral-900 p-3 rounded-md hover:cursor-pointer",
-        isActive && "bg-cyan-900 hover:cursor-not-allowed"
+        isActive && "bg-cyan-600 hover:cursor-not-allowed"
       )}
     >
       {chat.users
