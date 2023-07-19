@@ -1,16 +1,22 @@
-import { Form } from "@remix-run/react";
 import { Send } from "lucide-react";
 import { Button, Input, Layout } from "~/client/components";
 import { Message } from "./components";
 import { useEffect, useRef } from "react";
 import { LoaderProps } from "./_types";
 import { useLiveLoader } from "~/client/hooks";
+import { Form } from "@remix-run/react";
 
 export function View() {
   const { messages } = useLiveLoader<LoaderProps>();
+
   const ref = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
   useEffect(() => {
-    if (ref.current) ref.current.scrollTop = ref.current.scrollHeight;
+    if (ref.current) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+      if (formRef.current) formRef.current.reset();
+    }
   }, [messages]);
 
   return (
@@ -21,7 +27,11 @@ export function View() {
         ))}
       </section>
 
-      <Form method="post" className="flex mt-auto w-[100%] space-x-4">
+      <Form
+        ref={formRef}
+        method="post"
+        className="flex mt-auto w-[100%] space-x-4"
+      >
         <Input.Field
           placeholder="Your message..."
           name="message"
